@@ -81,8 +81,7 @@ export default class Personagem {
     console.log(`${this.nome} equipou a arma ${arma.getNome()}.`);
   }
 
-  // Método privado para calcular o dano
-  private calcularDano(): number {
+  protected calcularDano(): number {
     const danoArma = this.arma ? this.arma.getDano() : 0;
     return this.forca + danoArma;
   }
