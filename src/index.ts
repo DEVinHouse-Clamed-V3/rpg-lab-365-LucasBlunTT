@@ -165,3 +165,112 @@
 //     console.log(`${inimigo.getNome()} foi derrotado.`);
 //   }
 // });
+
+import Arma from './models/Arma';
+import Personagem from './models/Personagem';
+import Inimigo from './models/Inimigo';
+import Chefe from './models/Chefe';
+
+// Criando armas
+const espadaRuna = new Arma(
+  'Espada Rúnica',
+  100,
+  'Uma espada antiga infundida com runas mágicas.',
+);
+const arcoLongo = new Arma(
+  'Arco Longo',
+  40,
+  'Arco usado por atiradores experientes.',
+);
+const machadoPesado = new Arma(
+  'Machado Pesado',
+  60,
+  'Um machado que pode destruir armaduras.',
+);
+
+// Criando o personagem principal
+const heroi = new Personagem('Paladino', 200, 50);
+console.log(
+  `Personagem criado: ${heroi.getNome()} com ${heroi.getVida()} de vida.`,
+);
+
+// Criando o chefe
+const chefeFinal = new Chefe('Lorde das Trevas', 400, 80, espadaRuna);
+console.log(
+  `Chefe criado: ${chefeFinal.getNome()} com ${chefeFinal.getVida()} de vida.`,
+);
+
+// Criando inimigos comuns
+const goblin1 = new Inimigo('Goblin 1', 80, 15, arcoLongo);
+const goblin2 = new Inimigo('Goblin 2', 70, 20);
+const orc = new Inimigo('Orc', 100, 25, machadoPesado);
+const inimigos = [goblin1, goblin2, orc];
+
+console.log('\nInimigos criados:');
+inimigos.forEach((inimigo) => {
+  console.log(`${inimigo.getNome()} com ${inimigo.getVida()} de vida.`);
+});
+
+// Cenário de combate
+console.log('\n--- Início do Combate ---');
+
+let rodada = 1;
+while (
+  heroi.getVida() > 0 &&
+  (chefeFinal.getVida() > 0 ||
+    inimigos.some((inimigo) => inimigo.getVida() > 0))
+) {
+  console.log(`\n--- Rodada ${rodada} ---`);
+
+  // Heroi ataca: Primeiro o chefe, se estiver vivo; caso contrário, ataca o primeiro inimigo vivo.
+  if (chefeFinal.getVida() > 0) {
+    heroi.atacar(chefeFinal);
+  } else {
+    const inimigoAlvo = inimigos.find((inimigo) => inimigo.getVida() > 0);
+    if (inimigoAlvo) {
+      heroi.atacar(inimigoAlvo);
+    }
+  }
+
+  // Chefe ataca o herói, se estiver vivo
+  if (chefeFinal.getVida() > 0) {
+    chefeFinal.atacar(heroi);
+  }
+
+  // Inimigos atacam o herói, se estiverem vivos
+  inimigos.forEach((inimigo) => {
+    if (inimigo.getVida() > 0) {
+      inimigo.comportamentoAleatorio(heroi);
+    }
+  });
+
+  rodada++;
+}
+
+// Resultado do combate
+console.log('\n--- Fim do Combate ---');
+if (heroi.getVida() > 0) {
+  console.log(`${heroi.getNome()} derrotou o chefe e todos os inimigos!`);
+} else {
+  console.log(
+    `${heroi.getNome()} foi derrotado pelo exército do ${chefeFinal.getNome()}!`,
+  );
+}
+
+if (chefeFinal.getVida() > 0) {
+  console.log(
+    `${chefeFinal.getNome()} sobreviveu com ${chefeFinal.getVida()} de vida.`,
+  );
+} else {
+  console.log(`${chefeFinal.getNome()} foi derrotado.`);
+}
+
+inimigos.forEach((inimigo) => {
+  if (inimigo.getVida() > 0) {
+    console.log(
+      `${inimigo.getNome()} sobreviveu com ${inimigo.getVida()} de vida.`,
+    );
+  } else {
+    console.log(`${inimigo.getNome()} foi derrotado.`);
+  }
+});
