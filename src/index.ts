@@ -74,94 +74,94 @@
 {
   ('EX5');
 }
-import Arma from './models/Arma';
-import Personagem from './models/Personagem';
-import Inimigo from './models/Inimigo';
+// import Arma from './models/Arma';
+// import Personagem from './models/Personagem';
+// import Inimigo from './models/Inimigo';
 
-// Criando armas
-const espadaLonga = new Arma(
-  'Espada Longa',
-  50,
-  'Uma espada longa feita de aço refinado.',
-);
-const arcoLongo = new Arma(
-  'Arco Longo',
-  40,
-  'Um arco usado para ataques à distância.',
-);
-const machadoDeGuerra = new Arma(
-  'Machado de Guerra',
-  60,
-  'Um machado pesado e mortal.',
-);
+// // Criando armas
+// const espadaLonga = new Arma(
+//   'Espada Longa',
+//   50,
+//   'Uma espada longa feita de aço refinado.',
+// );
+// const arcoLongo = new Arma(
+//   'Arco Longo',
+//   40,
+//   'Um arco usado para ataques à distância.',
+// );
+// const machadoDeGuerra = new Arma(
+//   'Machado de Guerra',
+//   60,
+//   'Um machado pesado e mortal.',
+// );
 
-// Criando o personagem principal
-const heroi = new Personagem('Cavaleiro', 150, 30);
-console.log(
-  `Personagem criado: ${heroi.getNome()} com ${heroi.getVida()} de vida e ${heroi.getForca()} de força.`,
-);
+// // Criando o personagem principal
+// const heroi = new Personagem('Cavaleiro', 150, 30);
+// console.log(
+//   `Personagem criado: ${heroi.getNome()} com ${heroi.getVida()} de vida e ${heroi.getForca()} de força.`,
+// );
 
-// Criando inimigos
-const goblin1 = new Inimigo('Goblin 1', 80, 15);
-const goblin2 = new Inimigo('Goblin 2', 70, 20);
-const orc = new Inimigo('Orc', 100, 25);
-const troll = new Inimigo('Troll', 120, 35);
-const dragao = new Inimigo('Dragão', 300, 50);
+// // Criando inimigos
+// const goblin1 = new Inimigo('Goblin 1', 80, 15);
+// const goblin2 = new Inimigo('Goblin 2', 70, 20);
+// const orc = new Inimigo('Orc', 100, 25);
+// const troll = new Inimigo('Troll', 120, 35);
+// const dragao = new Inimigo('Dragão', 300, 50);
 
-// Equipando armas aos inimigos
-goblin1.equiparArma(arcoLongo);
-goblin2.equiparArma(espadaLonga);
-orc.equiparArma(machadoDeGuerra);
+// // Equipando armas aos inimigos
+// goblin1.equiparArma(arcoLongo);
+// goblin2.equiparArma(espadaLonga);
+// orc.equiparArma(machadoDeGuerra);
 
-// Mostrando os inimigos criados
-const inimigos = [goblin1, goblin2, orc, troll, dragao];
-console.log('Inimigos criados:');
-inimigos.forEach((inimigo) => {
-  console.log(
-    `${inimigo.getNome()} com ${inimigo.getVida()} de vida e ${inimigo.getForca()} de força.`,
-  );
-});
+// // Mostrando os inimigos criados
+// const inimigos = [goblin1, goblin2, orc, troll, dragao];
+// console.log('Inimigos criados:');
+// inimigos.forEach((inimigo) => {
+//   console.log(
+//     `${inimigo.getNome()} com ${inimigo.getVida()} de vida e ${inimigo.getForca()} de força.`,
+//   );
+// });
 
-// Cenário de combate
-console.log('\n--- Início do Combate ---');
+// // Cenário de combate
+// console.log('\n--- Início do Combate ---');
 
-let rodada = 1;
-while (
-  heroi.getVida() > 0 &&
-  inimigos.some((inimigo) => inimigo.getVida() > 0)
-) {
-  console.log(`\n--- Rodada ${rodada} ---`);
+// let rodada = 1;
+// while (
+//   heroi.getVida() > 0 &&
+//   inimigos.some((inimigo) => inimigo.getVida() > 0)
+// ) {
+//   console.log(`\n--- Rodada ${rodada} ---`);
 
-  // Heroi ataca um inimigo aleatório vivo
-  const inimigoAlvo = inimigos.find((inimigo) => inimigo.getVida() > 0);
-  if (inimigoAlvo) {
-    heroi.atacar(inimigoAlvo);
-  }
+//   // Heroi ataca um inimigo aleatório vivo
+//   const inimigoAlvo = inimigos.find((inimigo) => inimigo.getVida() > 0);
+//   if (inimigoAlvo) {
+//     heroi.atacar(inimigoAlvo);
+//   }
 
-  // Cada inimigo vivo realiza uma ação aleatória contra o heroi
-  inimigos.forEach((inimigo) => {
-    if (inimigo.getVida() > 0) {
-      inimigo.comportamentoAleatorio(heroi);
-    }
-  });
+//   // Cada inimigo vivo realiza uma ação aleatória contra o heroi
+//   inimigos.forEach((inimigo) => {
+//     if (inimigo.getVida() > 0) {
+//       inimigo.comportamentoAleatorio(heroi);
+//     }
+//   });
 
-  rodada++;
-}
+//   rodada++;
+// }
 
-// Resultado do combate
-console.log('\n--- Fim do Combate ---');
-if (heroi.getVida() > 0) {
-  console.log(`${heroi.getNome()} sobreviveu com ${heroi.getVida()} de vida!`);
-} else {
-  console.log(`${heroi.getNome()} foi derrotado!`);
-}
+// // Resultado do combate
+// console.log('\n--- Fim do Combate ---');
+// if (heroi.getVida() > 0) {
+//   console.log(`${heroi.getNome()} sobreviveu com ${heroi.getVida()} de vida!`);
+// } else {
+//   console.log(`${heroi.getNome()} foi derrotado!`);
+// }
 
-inimigos.forEach((inimigo) => {
-  if (inimigo.getVida() > 0) {
-    console.log(
-      `${inimigo.getNome()} sobreviveu com ${inimigo.getVida()} de vida!`,
-    );
-  } else {
-    console.log(`${inimigo.getNome()} foi derrotado.`);
-  }
-});
+// inimigos.forEach((inimigo) => {
+//   if (inimigo.getVida() > 0) {
+//     console.log(
+//       `${inimigo.getNome()} sobreviveu com ${inimigo.getVida()} de vida!`,
+//     );
+//   } else {
+//     console.log(`${inimigo.getNome()} foi derrotado.`);
+//   }
+// });
